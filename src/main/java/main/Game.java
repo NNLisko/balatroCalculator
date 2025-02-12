@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+/* game class handles the game logic and scoring flow */
 public class Game {
     private Score score;
     public ArrayList<Card> playedHand;

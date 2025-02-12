@@ -1,5 +1,6 @@
 package main;
 
+/* playing card class with balatro modifiers */
 public class Card {
     Suits suit;
     Ranks rank;

@@ -1,5 +1,6 @@
 package main;
 
+/* card ranks */
 public enum Ranks {
     TWO(2),
     THREE(3),

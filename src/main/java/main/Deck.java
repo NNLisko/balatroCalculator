@@ -2,6 +2,12 @@ package main;
 
 import java.util.ArrayList;
 
+/* deck class that handles drawing the hand and that
+ * if a card is drawn its removed from a deck and if
+ * its returned, it is put back
+ * 
+ * future: account for dynamic balatro deck
+ */
 public class Deck {
     ArrayList<Card> deck = new ArrayList<Card>();
     private static int deckSize = 52;

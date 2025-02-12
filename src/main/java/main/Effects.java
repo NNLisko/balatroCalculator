@@ -1,5 +1,6 @@
 package main;
 
+/* Balatro card effects */
 public enum Effects {
     STEEL,
     GOLD,

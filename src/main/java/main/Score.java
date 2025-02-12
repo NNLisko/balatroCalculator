@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/* scoring class, handles scoring of each card,
+ * detects hand types: flush, straight etc.
+ * updates the chips and mult attributes
+ */
 public class Score {
     int chips;
     int mult;
