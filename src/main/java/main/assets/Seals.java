@@ -1,4 +1,4 @@
-package main;
+package main.assets;
 
 /* balatro seals */
 public enum Seals {

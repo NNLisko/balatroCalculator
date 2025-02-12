@@ -1,8 +1,14 @@
-package main;
+package main.balatroCalc;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import main.assets.Effects;
+import main.assets.Modifiers;
+import main.assets.Ranks;
+import main.assets.Seals;
+import main.assets.Suits;
 
 /* scoring class, handles scoring of each card,
  * detects hand types: flush, straight etc.
@@ -70,6 +76,7 @@ public class Score {
         ArrayList<Card> clone = new ArrayList<Card>(hand);
         boolean isAStraight = true;
         boolean isAFlush = true;
+        boolean isAHighCard = true;
 
         /* AI MADE COMPARATOR */
         Comparator<Card> comparator = Comparator
@@ -93,6 +100,7 @@ public class Score {
                 break;
             }
         }
+
         boolean isAStraightFlush = isAFlush && isAStraight;
         boolean isARoyalFlush = isAStraightFlush && clone.get(0).getRank() == Ranks.TEN;
 
@@ -108,11 +116,14 @@ public class Score {
         } else if (isAStraight) {
             this.chips = 30;
             this.mult = 4;
+        } else if (isAHighCard) {
+            this.chips = 5;
+            this.mult = 1;
         }
     }
 
     public void printScore() {
-        System.out.println(this.chips + " x " + this.mult);
-        System.out.println(this.chips * this.mult);
+        System.out.println("\n" + this.chips + " x " + this.mult);
+        System.out.println(this.chips * this.mult + "\n");
     }
 }

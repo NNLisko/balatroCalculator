@@ -1,4 +1,4 @@
-package main;
+package main.balatroCalc;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,8 @@ public class Game {
     }
 
     public void play() {
-        this.deck.drawHand();
+        /* this.deck.drawHand(); */
+        this.deck.testHand();
         this.score.processPlayedHand(playedHand);
         this.deck.returnHand(playedHand);
         this.score.printScore();

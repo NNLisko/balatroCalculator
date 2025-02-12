@@ -1,6 +1,10 @@
-package main;
+package main.balatroCalc;
 
 import java.util.ArrayList;
+
+import main.App;
+import main.assets.Ranks;
+import main.assets.Suits;
 
 /* deck class that handles drawing the hand and that
  * if a card is drawn its removed from a deck and if
@@ -37,6 +41,20 @@ public class Deck {
             deckSize--;
             App.game.playedHand.add(this.getCard(random));
         }
+    }
+
+    public void testHand() {
+        Card card1 = new Card(Suits.CLUBS, Ranks.TEN);
+        Card card2 = new Card(Suits.CLUBS, Ranks.THREE);
+        Card card3 = new Card(Suits.CLUBS, Ranks.EIGHT);
+        Card card4 = new Card(Suits.CLUBS, Ranks.SEVEN);
+        Card card5 = new Card(Suits.CLUBS, Ranks.KING);
+
+        App.game.playedHand.add(card1);
+        App.game.playedHand.add(card2);
+        App.game.playedHand.add(card3);
+        App.game.playedHand.add(card4);
+        App.game.playedHand.add(card5);
     }
 
     public void returnHand(ArrayList<Card> hand) {

@@ -1,4 +1,4 @@
-package main;
+package main.assets;
 
 /* card ranks */
 public enum Ranks {
