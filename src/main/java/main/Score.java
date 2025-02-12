@@ -109,6 +109,10 @@ public class Score {
             this.chips = 30;
             this.mult = 4;
         }
+    }
 
+    public void printScore() {
+        System.out.println(this.chips + " x " + this.mult);
+        System.out.println(this.chips * this.mult);
     }
 }

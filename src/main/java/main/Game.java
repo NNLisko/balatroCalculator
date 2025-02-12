@@ -18,5 +18,6 @@ public class Game {
         this.deck.drawHand();
         this.score.processPlayedHand(playedHand);
         this.deck.returnHand(playedHand);
+        this.score.printScore();
     }
 }
