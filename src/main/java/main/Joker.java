@@ -1,4 +1,4 @@
-package main.balatroCalc;
+package main;
 
 import main.assets.Modifiers;
 

@@ -1,8 +1,7 @@
-package main.balatroCalc;
+package main;
 
 import java.util.ArrayList;
 
-import main.App;
 import main.assets.Ranks;
 import main.assets.Suits;
 

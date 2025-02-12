@@ -1,4 +1,4 @@
-package main.balatroCalc;
+package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,8 +29,7 @@ public class Score {
         return this.chips * this.mult;
     }
 
-    public void processPlayedHand(ArrayList<Card> hand) {
-        detectHands(hand);
+    public void processAllFive(ArrayList<Card> hand) {
 
         for (Card card : hand) {
             if (card.seal == Seals.RED) {
@@ -70,13 +69,19 @@ public class Score {
      * flush, straight etc. currently this only checks for
      * natural poker hands so balatro's flush five for
      * example is not checked
+     * 
+     * when a hand is detected, it calls an appropriate
+     * scoring method
+     * 
+     * this method is bit messy :/
      */
 
-    private void detectHands(ArrayList<Card> hand) {
-        ArrayList<Card> clone = new ArrayList<Card>(hand);
+    public void detectHands(ArrayList<Card> hand) {
         boolean isAStraight = true;
         boolean isAFlush = true;
         boolean isAHighCard = true;
+
+        ArrayList<Card> clone = new ArrayList<Card>(hand);
 
         /* AI MADE COMPARATOR */
         Comparator<Card> comparator = Comparator
@@ -107,15 +112,19 @@ public class Score {
         if (isARoyalFlush) {
             this.chips = 100;
             this.mult = 8;
+            processAllFive(hand);
         } else if (isAStraightFlush) {
             this.chips = 100;
             this.mult = 8;
+            processAllFive(hand);
         } else if (isAFlush) {
             this.chips = 35;
             this.mult = 4;
+            processAllFive(hand);
         } else if (isAStraight) {
             this.chips = 30;
             this.mult = 4;
+            processAllFive(hand);
         } else if (isAHighCard) {
             this.chips = 5;
             this.mult = 1;
