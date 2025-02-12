@@ -15,8 +15,12 @@ public class Card {
         this.seal = Seals.NONE;
     }
 
-    public int getRank() {
+    public int getRankValue() {
         return this.rank.getValue();
+    }
+
+    public Ranks getRank() {
+        return this.rank;
     }
 
     public Suits getSuit() {

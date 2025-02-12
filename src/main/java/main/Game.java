@@ -14,8 +14,8 @@ public class Game {
     }
 
     public void play() {
-        deck.drawHand();
-        score.processPlayedHand(playedHand);
-        deck.returnHand(playedHand);
+        this.deck.drawHand();
+        this.score.processPlayedHand(playedHand);
+        this.deck.returnHand(playedHand);
     }
 }
