@@ -14,4 +14,12 @@ public class Card {
         this.mod = Modifiers.NONE;
         this.seal = Seals.NONE;
     }
+
+    public int getRank() {
+        return this.rank.getValue();
+    }
+
+    public Suits getSuit() {
+        return this.suit;
+    }
 }
