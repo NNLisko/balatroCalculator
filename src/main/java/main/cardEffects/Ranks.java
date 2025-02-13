@@ -1,4 +1,4 @@
-package main.assets;
+package main.cardEffects;
 
 /* card ranks */
 public enum Ranks {

@@ -1,4 +1,4 @@
-package main.assets;
+package main.cardEffects;
 
 /* balatro seals */
 public enum Seals {

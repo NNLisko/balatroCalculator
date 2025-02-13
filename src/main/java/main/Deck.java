@@ -1,9 +1,11 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-import main.assets.Ranks;
-import main.assets.Suits;
+import main.cardEffects.Ranks;
+import main.cardEffects.Suits;
 
 /* deck class that handles drawing the hand and that
  * if a card is drawn its removed from a deck and if
@@ -40,6 +42,19 @@ public class Deck {
             deckSize--;
             App.game.playedHand.add(this.getCard(random));
         }
+        App.game.orderedHand = new ArrayList<Card>(App.game.playedHand);
+        sortHand();
+    }
+
+    public void sortHand() {
+        ArrayList<Card> orderedHand = App.game.orderedHand;
+
+        /* AI MADE COMPARATOR */
+        Comparator<Card> comparator = Comparator
+                .comparing(Card::getRankValue)
+                .thenComparing(Card::getSuit);
+
+        Collections.sort(orderedHand, comparator);
     }
 
     public void testHand() {

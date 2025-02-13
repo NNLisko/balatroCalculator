@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Game {
     private Score score;
     public ArrayList<Card> playedHand;
+    public ArrayList<Card> orderedHand;
     private Deck deck;
 
     public Game() {
@@ -15,9 +16,8 @@ public class Game {
     }
 
     public void play() {
-        /* this.deck.drawHand(); */
-        this.deck.testHand();
-        this.score.detectHands(playedHand);
+        this.deck.drawHand();
+        this.score.detectHands(playedHand, orderedHand);
         this.deck.returnHand(playedHand);
         this.score.printScore();
     }

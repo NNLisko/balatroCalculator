@@ -1,4 +1,4 @@
-package main.assets;
+package main.cardEffects;
 
 /* Balatro suits */
 public enum Suits {

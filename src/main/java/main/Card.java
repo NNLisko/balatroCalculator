@@ -1,10 +1,10 @@
 package main;
 
-import main.assets.Effects;
-import main.assets.Modifiers;
-import main.assets.Ranks;
-import main.assets.Seals;
-import main.assets.Suits;
+import main.cardEffects.Effects;
+import main.cardEffects.Modifiers;
+import main.cardEffects.Ranks;
+import main.cardEffects.Seals;
+import main.cardEffects.Suits;
 
 /* playing card class with balatro modifiers */
 public class Card {

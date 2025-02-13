@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import main.assets.Effects;
-import main.assets.Modifiers;
-import main.assets.Ranks;
-import main.assets.Seals;
-import main.assets.Suits;
+import main.cardEffects.Effects;
+import main.cardEffects.Modifiers;
+import main.cardEffects.Ranks;
+import main.cardEffects.Seals;
+import main.cardEffects.Suits;
 
 /* scoring class, handles scoring of each card,
  * detects hand types: flush, straight etc.
@@ -27,16 +27,6 @@ public class Score {
 
     public int calculateScore() {
         return this.chips * this.mult;
-    }
-
-    public void processAllFive(ArrayList<Card> hand) {
-
-        for (Card card : hand) {
-            if (card.seal == Seals.RED) {
-                scoreCard(card);
-            }
-            scoreCard(card);
-        }
     }
 
     private void scoreCard(Card card) {
@@ -76,38 +66,30 @@ public class Score {
      * this method is bit messy :/
      */
 
-    public void detectHands(ArrayList<Card> hand) {
+    public void detectHands(ArrayList<Card> hand, ArrayList<Card> orderedHand) {
         boolean isAStraight = true;
         boolean isAFlush = true;
         boolean isAHighCard = true;
 
-        ArrayList<Card> clone = new ArrayList<Card>(hand);
-
-        /* AI MADE COMPARATOR */
-        Comparator<Card> comparator = Comparator
-                .comparing(Card::getRankValue)
-                .thenComparing(Card::getSuit);
-
-        Collections.sort(clone, comparator);
-
         /* CHECKS IF THE HAND IS A STRAIGHT */
         for (int i = 1; i < 5; i++) {
-            if (clone.get(i).getRank().ordinal() != clone.get(i - 1).getRank().ordinal() + 1) {
+            if (orderedHand.get(i).getRank().ordinal() != orderedHand.get(i - 1).getRank().ordinal() + 1) {
                 isAStraight = false;
                 break;
             }
         }
+
         /* CHECKS IF THE HAND IS A FLUSH */
         for (int j = 0; j < 5; j++) {
-            Suits fSuit = clone.get(0).getSuit();
-            if (clone.get(j).eff != Effects.WILD && clone.get(j).getSuit() != fSuit) {
+            Suits fSuit = orderedHand.get(0).getSuit();
+            if (orderedHand.get(j).eff != Effects.WILD && orderedHand.get(j).getSuit() != fSuit) {
                 isAFlush = false;
                 break;
             }
         }
 
         boolean isAStraightFlush = isAFlush && isAStraight;
-        boolean isARoyalFlush = isAStraightFlush && clone.get(0).getRank() == Ranks.TEN;
+        boolean isARoyalFlush = isAStraightFlush && orderedHand.get(0).getRank() == Ranks.TEN;
 
         if (isARoyalFlush) {
             this.chips = 100;
@@ -128,11 +110,31 @@ public class Score {
         } else if (isAHighCard) {
             this.chips = 5;
             this.mult = 1;
+            processHighCard(orderedHand);
         }
+    }
+
+    /*
+     * Below is the scoring methods, eg when all cards in the hand
+     * need to be scored, vs to for example high card when only the
+     * top card needs to be scored
+     */
+
+    public void processAllFive(ArrayList<Card> hand) {
+        for (Card card : hand) {
+            if (card.seal == Seals.RED) {
+                scoreCard(card);
+            }
+            scoreCard(card);
+        }
+    }
+
+    public void processHighCard(ArrayList<Card> hand) {
+        scoreCard(hand.get(4));
     }
 
     public void printScore() {
         System.out.println("\n" + this.chips + " x " + this.mult);
-        System.out.println(this.chips * this.mult + "\n");
+        System.out.println(this.calculateScore() + "\n");
     }
 }
