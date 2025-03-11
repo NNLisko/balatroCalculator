@@ -1,10 +1,9 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import main.cardEffects.Effects;
+import main.cardEffects.HandTypes;
 import main.cardEffects.Modifiers;
 import main.cardEffects.Ranks;
 import main.cardEffects.Seals;
@@ -66,10 +65,44 @@ public class Score {
      * this method is bit messy :/
      */
 
+    public void handDirector(ArrayList<Card> hand, ArrayList<Card> orderedHand, HandTypes handType) {
+
+        System.out.println(handType);
+        switch (handType) {
+            case HandTypes.ROYALFLUSH:
+                this.chips = 100;
+                this.mult = 8;
+                processAllFive(hand);
+                break;
+            case HandTypes.STRAIGHTFLUSH:
+                this.chips = 100;
+                this.mult = 8;
+                processAllFive(hand);
+                break;
+            case HandTypes.STRAIGHT:
+                this.chips = 30;
+                this.mult = 4;
+                processAllFive(hand);
+                break;
+            case HandTypes.FLUSH:
+                this.chips = 35;
+                this.mult = 4;
+                processAllFive(hand);
+                break;
+            case HandTypes.HIGHCARD:
+                this.chips = 5;
+                this.mult = 1;
+                processHighCard(orderedHand);
+            default:
+                break;
+        }
+    }
+
     public void detectHands(ArrayList<Card> hand, ArrayList<Card> orderedHand) {
         boolean isAStraight = true;
         boolean isAFlush = true;
-        boolean isAHighCard = true;
+        boolean isAStraightFlush;
+        boolean isARoyalFlush;
 
         /* CHECKS IF THE HAND IS A STRAIGHT */
         for (int i = 1; i < 5; i++) {
@@ -88,30 +121,22 @@ public class Score {
             }
         }
 
-        boolean isAStraightFlush = isAFlush && isAStraight;
-        boolean isARoyalFlush = isAStraightFlush && orderedHand.get(0).getRank() == Ranks.TEN;
+        isAStraightFlush = isAFlush && isAStraight;
+        isARoyalFlush = isAStraight && (orderedHand.get(1).getRank() == Ranks.TEN);
+
+        HandTypes handType;
 
         if (isARoyalFlush) {
-            this.chips = 100;
-            this.mult = 8;
-            processAllFive(hand);
+            handType = HandTypes.ROYALFLUSH;
         } else if (isAStraightFlush) {
-            this.chips = 100;
-            this.mult = 8;
-            processAllFive(hand);
-        } else if (isAFlush) {
-            this.chips = 35;
-            this.mult = 4;
-            processAllFive(hand);
+            handType = HandTypes.STRAIGHTFLUSH;
         } else if (isAStraight) {
-            this.chips = 30;
-            this.mult = 4;
-            processAllFive(hand);
-        } else if (isAHighCard) {
-            this.chips = 5;
-            this.mult = 1;
-            processHighCard(orderedHand);
+            handType = HandTypes.STRAIGHT;
+        } else {
+            handType = HandTypes.HIGHCARD;
         }
+
+        handDirector(hand, orderedHand, handType);
     }
 
     /*
